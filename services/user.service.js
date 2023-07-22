@@ -69,23 +69,23 @@ const updateUser = async(currentUser, userId, data) =>{
          * User with any role apart from admin can update their own information only.
          * User with any role apart from admin cannot update anyone else's information.
          */
-        // if(currentUser.userType != userTypes.admin && currentUser._id.toString() != user._id.toString()){
-        //     throw new Error(`current user with the userType: ${currentUser.userType} is not allowed to change the information of other users`);
-        // }
+        if(currentUser.userType != userTypes.admin && currentUser._id.toString() != user._id.toString()){
+            throw new Error(`current user with the userType: ${currentUser.userType} is not allowed to change the information of other users`);
+        }
 
         /**
          * If userType is getting updated, then only admin can update it
          */
-        // if(data.userType && data.userType!= user.userType && currentUser.userType != userTypes.admin){
-        //     throw new Error(`current user with the userType: ${currentUser.userType} is not allowed to change the userType`);
-        // }  
+        if(data.userType && data.userType!= user.userType && currentUser.userType != userTypes.admin){
+            throw new Error(`current user with the userType: ${currentUser.userType} is not allowed to change the userType`);
+        }  
         
         /**
          * If userStatus is getting updated, then only admin can update it
          */
-        // if(data.userStatus && data.userStatus!= user.userStatus && currentUser.userType != userTypes.admin){
-        //     throw new Error(`current user with the userType: ${currentUser.userType} is not allowed to change the userStatus`);
-        // }  
+        if(data.userStatus && data.userStatus!= user.userStatus && currentUser.userType != userTypes.admin){
+            throw new Error(`current user with the userType: ${currentUser.userType} is not allowed to change the userStatus`);
+        }  
 
         user.name = data.name || user.name;
         user.email = data.email || user.email;
