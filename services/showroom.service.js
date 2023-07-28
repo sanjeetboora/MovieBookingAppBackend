@@ -20,6 +20,9 @@ const createShowroom = async(data, user) => {
         bookings: data.bookings,
     }
     const showroom = await Showroom.create(showroomObj);
+    const theatre = await Theatre.findOne({_id:showroom.theatreId});
+    theatre.showrooms.push[showroom._id];
+    Theatre.findOneAndUpdate({_id:showroom.theatreId}, theatre, {new:true});
     const emailContent = mailTemplate(user.name, `showroom is created successfully.`, `Showroom Information: ${showroom}`);
     sendEmail(
         "Showroom is created successfully", 
