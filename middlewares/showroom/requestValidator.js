@@ -43,7 +43,7 @@ const validateShowroomReqBody = async(req, res, next) =>{
         //validate if bookedSeats is having unique values
         if(req.body.bookedSeats.length > 0){
             const bookedSeatsSet = new Set(req.body.bookedSeats);
-            if(bookedSeatsSet.size() != req.body.bookedSeats.length){
+            if(bookedSeatsSet.size != req.body.bookedSeats.length){
                 throw new Error("seat numbers provided for field 'bookedSeats' are not unique")
             }
         }

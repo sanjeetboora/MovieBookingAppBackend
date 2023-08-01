@@ -73,6 +73,7 @@ const signin = async(userData) => {
             username: user.username,
             userType: user.userType,
             userStatus: user.userStatus,
+            bookings: user.bookings,
             token: accessToken
         }
         return response;

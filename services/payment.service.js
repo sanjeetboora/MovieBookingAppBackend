@@ -19,6 +19,9 @@ const createPayment = async(data) =>{
     const payment = await Payment.create(paymentObj);
     const booking = await Booking.findOne({_id: data.bookingId});
     booking.paymentId = payment._id;
+    if(paymentObj.status == "COMPLETED"){
+        booking.status = "CONFIRMED";
+    }
     await Booking.findOneAndUpdate({_id: data.bookingId}, booking);
     const user = await User.findOne({_id: booking.userId});
     const emailContent = mailTemplate(user.name, `your payment is done successfully.`, `Payment Information: ${payment}`);

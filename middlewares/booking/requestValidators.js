@@ -35,7 +35,7 @@ const validateBookingReqBody = async(req, res, next) =>{
         }
         //list of chosen seats to book is having unique seat numbers
         const seatsSet = new Set(req.body.seatsToBook);
-        if(seatsSet.size() != req.body.seatsToBook.length){
+        if(seatsSet.size != req.body.seatsToBook.length){
             throw new Error("seat numbers provided for field 'seatsToBook' are not unique")
         }
         //totalCost is valid
